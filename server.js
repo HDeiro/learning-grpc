@@ -23,7 +23,8 @@ server.bind(
 // Adds services
 server.addService(todoPackage.Todo.service, {
     'createTodo': createTodo,
-    'readTodos': readTodos
+    'readTodos': readTodos,
+    'readTodosStream': readTodosStream
 });
 
 // Functions to be listened by grpc services
@@ -46,6 +47,14 @@ function readTodos(call, callback) {
     callback(null, {
         items: todos
     });
+}
+
+function readTodosStream(call, callback) {
+    todos.forEach(todo => {
+        // Send Item
+        call.write(todo);
+    });
+    call.end();
 }
 
 // Start service

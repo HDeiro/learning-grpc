@@ -27,6 +27,7 @@ const payload = {
 
 client.createTodo(payload, (err, response) => {
     console.log(
+        '\x1b[36m', // Change color to cyan
         'Received from server (createTodo): ', 
         JSON.stringify(response)
     );
@@ -34,7 +35,21 @@ client.createTodo(payload, (err, response) => {
 
 client.readTodos({}, (err, response) => {
     console.log(
+        '\x1b[33m', // Change color to yellow
         'Received from server (readTodos): ', 
         JSON.stringify(response)
     );
 });
+
+const call = client.readTodosStream();
+call.on('data', todoItem => {
+    console.log(
+        '\x1b[32m', // Change color to green
+        'Received from server (readTodosStream): ', 
+        JSON.stringify(todoItem),
+    );
+});
+call.on('end', e => console.log(
+    '\x1b[32m', // Change color to green
+    'Received from server (readTodosStream): Stream DONE'
+));

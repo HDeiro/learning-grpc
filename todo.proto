@@ -19,4 +19,7 @@ service Todo {
 
     // There's no default voidParam, it needs to be defined
     rpc readTodos(voidParam) returns (TodoItems);
+
+    // There's no default voidParam, it needs to be defined
+    rpc readTodosStream(voidParam) returns (stream TodoItem);
 }
