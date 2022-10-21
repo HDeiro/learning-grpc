@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package todoPackage;
+
+message void {}
+
+message TodoItem {
+    int32 id = 1;
+    string text = 2;
+}
+
+message TodoItems {
+    // Type refers to an array of TodoItem called items
+    repeated TodoItem items = 1;
+}
+
+service Todo {
+    rpc createTodo(TodoItem) returns (TodoItem);
+
+    // There's no default void, it needs to be defined
+    rpc readTodos(void) returns (TodoItems);
+}
