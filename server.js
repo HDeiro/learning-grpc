@@ -42,7 +42,10 @@ function createTodo({ request }, callback) {
 }
 
 function readTodos(call, callback) {
-
+    // The list must follow the schema
+    callback(null, {
+        items: todos
+    });
 }
 
 // Start service

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package todoPackage;
 
-message void {}
+message voidParam {}
 
 message TodoItem {
     int32 id = 1;
@@ -17,6 +17,6 @@ message TodoItems {
 service Todo {
     rpc createTodo(TodoItem) returns (TodoItem);
 
-    // There's no default void, it needs to be defined
-    rpc readTodos(void) returns (TodoItems);
+    // There's no default voidParam, it needs to be defined
+    rpc readTodos(voidParam) returns (TodoItems);
 }

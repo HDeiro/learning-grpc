@@ -22,12 +22,19 @@ const client = new todoPackage.Todo(
 
 const payload = {
     id: -1,
-    text: 'This is a todo!'
+    text: `This is a todo! ${Date.now()}`
 };
 
 client.createTodo(payload, (err, response) => {
     console.log(
-        'Received from server: ', 
+        'Received from server (createTodo): ', 
+        JSON.stringify(response)
+    );
+});
+
+client.readTodos({}, (err, response) => {
+    console.log(
+        'Received from server (readTodos): ', 
         JSON.stringify(response)
     );
 });
