@@ -10,6 +10,9 @@ const grpcObject = grpc.loadPackageDefinition(packageDef);
 // Gets the todo package (defined in protobuf file)
 const { todoPackage } = grpcObject;
 
+// Where todos will be stored
+const todos = [];
+
 // Creates server
 const server = new grpc.Server();
 server.bind(
@@ -27,8 +30,15 @@ server.addService(todoPackage.Todo.service, {
 // Tooks two params always: 
 //      - call     // similar to a Request object
 //      - callback // Will execute with a response from the grpc service
-function createTodo(call, callback) {
-    console.log(call);
+function createTodo({ request }, callback) {
+    const todoItem = {
+        id: todos.length + 1,
+        text: request.text
+    };
+    todos.push(todoItem);
+
+    // Response (length of response - null autofills that, response)
+    callback(null, todoItem);
 }
 
 function readTodos(call, callback) {
